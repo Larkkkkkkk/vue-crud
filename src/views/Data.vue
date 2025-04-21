@@ -5,8 +5,8 @@ import{Search} from "@element-plus/icons-vue";
 const data=reactive({
   name:null,
   tableData:[{date:'2016-05-02',name:'宋亚翔',state:'陕西省',city:'西安市',address:'未央区'},
-    {date:'2025-04-02',name:'宋亚翔',state:'陕西省',city:'西安市',address:'未央区'},
-    {date:'2020-11-12',name:'宋亚翔',state:'陕西省',city:'西安市',address:'未央区'}
+    {date:'2025-04-02',name:'李四',state:'陕西省',city:'西安市',address:'未央区'},
+    {date:'2020-11-12',name:'王五',state:'陕西省',city:'西安市',address:'未央区'}
   ],
   pageNum:1,
   pageSize:10,
