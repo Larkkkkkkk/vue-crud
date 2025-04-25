@@ -1,12 +1,19 @@
 <script setup>
 import {ref,reactive} from "vue";
 import router from '../router/index.js'
+
 const data=reactive({
   id: router.currentRoute.value.query.id,
   name: router.currentRoute.value.query.name,
+  employeeList:[],
 })
-console.log("路由传参过来的："+data.id)
-console.log("路由传参过来的："+data.name)
+
+import request from "@/assets/utils/request.js";
+request.get('/employee/selectAll').then(res =>{ //res是整个请求[res.data是出来的结果]
+  data.employeeList=res.data
+})
+
+
 </script>
 <template>
   <!--路由传参-->
