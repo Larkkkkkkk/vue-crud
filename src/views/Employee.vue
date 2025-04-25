@@ -9,14 +9,13 @@ const data=reactive({
   formVisible:false,
   form:{},
   ids:[],
+  id:null,
 });
 import request from "@/assets/utils/request.js";
 import {ElMessage} from "element-plus";
 //加载数据
 const load = () => {
-  request.get('/employee/selectPage',
-      {params:{pageNum:data.pageNum, pageSize:data.pageSize,name:data.name}})
-      .then(res =>{ //res是整个请求[res.data是出来的结果]
+  request.get('/employee/selectPage', {params:{pageNum:data.pageNum, pageSize:data.pageSize,name:data.name}}).then(res =>{ //res是整个请求[res.data是出来的结果]
         // console.log(res)
     data.tableData=res.data.list
     data.total=res.data.total
@@ -58,8 +57,7 @@ const handleUpdate = (row) => {  //row是行对象
 }
 //修改员工数据
 const update= () => {
-  request.post('/employee/update',data.form)
-      .then(res => { //res是整个请求[res.data是出来的结果]
+  request.post('/employee/update',data.form).then(res => { //res是整个请求[res.data是出来的结果]
         if(res.code ==='200'){
           data.formVisible=false //关闭新增窗口
           ElMessage.success('修改员工信息操作成功')
@@ -92,7 +90,7 @@ const delAll= () => {
   ElMessageBox.confirm('删除员工数据后无法恢复，确认是否删除？','删除确认',{type:'warning'}).then(()=>{
     request.delete(`/employee/deleteAll`,{data:data.ids}).then(res => { //res是整个请求[res.data是出来的结果]`
       if(res.code ==='200'){
-        ElMessage.success('删除员工信息操作成功')
+        ElMessage.success('删除所选多个员工信息操作成功')
         load() //删除成功后重新加载数据
       }else{
         ElMessage.error(res.msg)
