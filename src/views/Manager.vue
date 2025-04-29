@@ -1,6 +1,10 @@
 <script setup>
 import router from '../router/index.js'
 import img from '../assets/logo.svg'
+import {reactive} from "vue"
+const data=reactive({
+  user:JSON.parse(localStorage.getItem('xm-pro-user'))
+})
 </script>
 
 <template>
@@ -12,7 +16,7 @@ import img from '../assets/logo.svg'
     <div style="flex: 1"></div>
     <div style="width: fit-content; display: flex; align-items: center;padding-right: 10px">
       <el-image :src="img" style="width: 40px; height: 40px"></el-image>
-      <span style="color: white; margin-left: 5px">宋亚翔</span>
+      <span style="color: white; margin-left: 5px">{{data.user.name}}</span>
     </div>
   </div>
   <!--2.下面部分-->
