@@ -10,6 +10,11 @@ const data=reactive({
   form:{},
   ids:[],
   id:null,
+  rules:{
+    username:[{required:true,message:'请输入账号',trigger:'blur'}],
+    name:[{required:true,message:'请输入名称',trigger:'blur'}],
+    no:[{required:true,message:'请输入工号',trigger:'blur'}]
+  }
 });
 import request from "@/assets/utils/request.js";
 import {ElMessage} from "element-plus";
@@ -34,7 +39,13 @@ const handleAdd = () => {
   data.form={}  //清空列表
 }
 const save = () => {
-  data.form.id ? update():add()
+  //增加校验
+  formRef.value.validate((valid)=>{
+    if(valid){
+      data.form.id ? update():add()
+    }
+  })
+  //原来逻辑 data.form.id ? update():add()
 }
 //新增员工数据
 const add= () => {
@@ -98,6 +109,9 @@ const delAll= () => {
     })
   }).catch()
 }
+//表单校验
+const formRef=ref()
+
 </script>
 
 <template>
@@ -116,6 +130,8 @@ const delAll= () => {
     <div>
       <el-table :data="data.tableData" @selection-change="handleSelectionChange" stripe border height="1000" sytle="width:200%" max-height="1000">
         <el-table-column fixed type="selection" width="50"></el-table-column>
+        <el-table-column prop="username" label="用户名称" width="120"></el-table-column>
+        <el-table-column prop="role" label="角色" width="120"></el-table-column>
         <el-table-column prop="name" label="名称" width="120"></el-table-column>
         <el-table-column prop="sex" label="性别" width="60"></el-table-column>
         <el-table-column prop="no" label="工号" width="120"></el-table-column>
@@ -143,21 +159,24 @@ const delAll= () => {
       />
     </div>
     <!--新增页面的弹出框-->
-    <el-dialog v-model="data.formVisible" title="员工信息" width="500">
-      <el-form :model="data.form">
-        <el-form-item label="姓名" label-width="50px">
+    <el-dialog v-model="data.formVisible" title="员工信息" width="500" destroy-on-close>
+      <el-form ref="formRef" :rules="data.rules" :model="data.form">  <!--ref表单校验-->
+        <el-form-item label="账号" label-width="60px" prop="username">
+          <el-input v-model="data.form.username" autocomplete="off" />
+        </el-form-item>
+        <el-form-item label="名称" label-width="60px" prop="name">
           <el-input v-model="data.form.name" autocomplete="off" />
         </el-form-item>
-        <el-form-item label="性别" label-width="50px">
+        <el-form-item label="性别" label-width="60px">
           <el-select v-model="data.form.sex" placeholder="选择性别">
             <el-option label="女" value="女" />
             <el-option label="男" value="男" />
           </el-select>
         </el-form-item>
-        <el-form-item label="工号" label-width="50px">
+        <el-form-item label="工号" label-width="60px" prop="no">
           <el-input v-model="data.form.no" autocomplete="off" />
         </el-form-item>
-        <el-form-item label="年龄" label-width="50px">
+        <el-form-item label="年龄" label-width="60px">
           <el-input v-model="data.form.age" autocomplete="off" />
         </el-form-item>
         <el-form-item label="个人介绍" label-width="80px">

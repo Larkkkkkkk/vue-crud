@@ -27,7 +27,7 @@ import img from '../assets/logo.svg'
           <el-menu-item>管理员信息</el-menu-item>
           <el-menu-item index="/manager/employee">员工信息</el-menu-item>
         </el-sub-menu>
-        <el-menu-item index="2"><el-icon><Back/></el-icon>退出登录</el-menu-item>
+        <el-menu-item index="/login"><el-icon><Back/></el-icon>退出登录</el-menu-item>
         <el-menu-item index="3"><el-icon><UserFilled/></el-icon>个人信息</el-menu-item>
       </el-menu>
     </div>
