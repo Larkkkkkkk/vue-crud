@@ -11,6 +11,7 @@ const router = createRouter({
     ]},
       {path: '/404', name: 'NotFound', meta: {title: '404找不到页面'}, component: () => import('../views/404.vue'),},
       {path: '/login', name: 'Login', meta: {title: '登录页面'}, component: () => import('../views/Login.vue'),},
+      {path: '/register', name: 'Register', meta: {title: '注册页面'}, component: () => import('../views/Register.vue'),},
       {path: '/:pathMatch(.*)', redirect:'/404'},  // /通过redirect重定向到/home位置
   ]
 })
