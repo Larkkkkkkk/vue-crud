@@ -6,7 +6,7 @@ const data=reactive({
   form:{},
   rules:{
     username:[{required:true,message:'请输入账号',trigger:'blur'}],
-    password:[{required:true,message:'请输入密码',trigger:'blur'}]
+    password:[{required:true,message:'请输入密码',trigger:'blur'},{min:3,message:'密码长度必须大于等于3',trigger:'blur'}]
   }
 })
 //登录校验
