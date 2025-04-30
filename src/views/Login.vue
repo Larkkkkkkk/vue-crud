@@ -3,10 +3,11 @@ import {ref,reactive} from "vue";
 import request from "@/assets/utils/request.js";
 import {ElMessage} from "element-plus";
 const data=reactive({
-  form:{},
+  form:{role:'ADMIN'},
   rules:{
     username:[{required:true,message:'请输入账号',trigger:'blur'}],
-    password:[{required:true,message:'请输入密码',trigger:'blur'},{min:3,message:'密码长度必须大于等于3',trigger:'blur'}]
+    password:[{required:true,message:'请输入密码',trigger:'blur'},{min:3,message:'密码长度必须大于等于3',trigger:'blur'}],
+    role:[{required:true,message:'请选择角色',trigger:'blur'}],
   }
 })
 //登录校验
@@ -41,6 +42,12 @@ const login = () => {
           </el-form-item>
           <el-form-item prop="password">
             <el-input size="large" v-model="data.form.password" placeholder="请输入密码" prefix-icon="Lock"></el-input>
+          </el-form-item>
+          <el-form-item prop="role">
+            <el-select v-model="data.form.role" placeholder="请选择角色" size="large">
+              <el-option value="ADMIN" label="管理员"></el-option>
+              <el-option value="EMP" label="员工"></el-option>
+            </el-select>
           </el-form-item>
           <div style="margin-bottom: 20px">
             <el-button size="large" style="width:100%" type="primary" @click="login">登录</el-button>
