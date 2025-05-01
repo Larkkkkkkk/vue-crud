@@ -9,6 +9,7 @@ const router = createRouter({
         {path: 'data', name: 'data', meta: {title: '数据展示页面'}, component: () => import('../views/Data.vue'),},
         {path: 'employee', name: 'employee', meta: {title: '员工信息页面'}, component: () => import('../views/Employee.vue'),},
         {path: 'admin', name: 'admin', meta: {title: '管理员信息页面'}, component: () => import('../views/Admin.vue'),},
+        {path: 'person', name: 'person', meta: {title: '个人信息页面'}, component: () => import('../views/Person.vue'),},
     ]},
       {path: '/404', name: 'NotFound', meta: {title: '404找不到页面'}, component: () => import('../views/404.vue'),},
       {path: '/login', name: 'Login', meta: {title: '登录页面'}, component: () => import('../views/Login.vue'),},

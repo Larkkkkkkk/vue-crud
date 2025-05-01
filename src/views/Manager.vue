@@ -38,7 +38,7 @@ const logout = () =>{
           <el-menu-item index="/manager/employee">员工信息</el-menu-item>
         </el-sub-menu>
         <el-menu-item @click="logout"><el-icon><Back/></el-icon>退出登录</el-menu-item>
-        <el-menu-item index="3"><el-icon><UserFilled/></el-icon>个人信息</el-menu-item>
+        <el-menu-item index="/manager/person"><el-icon><UserFilled/></el-icon>个人信息</el-menu-item>
       </el-menu>
     </div>
     <!--2.2右侧主体区域-->
