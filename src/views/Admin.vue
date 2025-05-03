@@ -70,6 +70,7 @@ const update= () => {
   request.post('/admin/update',data.form).then(res => { //res是整个请求[res.data是出来的结果]
     if(res.code ==='200'){
       data.formVisible=false //关闭新增窗口
+      localStorage.setItem('xm-pro-user',JSON.stringify(data.form))  //重
       ElMessage.success('修改管理员信息操作成功')
       load() //修改成功后重新加载数据
     }else {
