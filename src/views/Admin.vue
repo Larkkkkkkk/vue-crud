@@ -1,5 +1,9 @@
 <script setup>
 import {ref,reactive} from "vue";
+//上传头像
+const handleAvatarSuccess= (res) =>{
+  data.form.avatar=res.data
+}
 const data=reactive({
   name:null,
   tableData:[],
@@ -129,6 +133,12 @@ const formRef=ref()
     </div>
     <div>
       <el-table :data="data.tableData" @selection-change="handleSelectionChange" stripe border height="1000" sytle="width:200%" max-height="1000">
+        <!--新增展示用户头像-->
+        <el-table-column prop="avatar" label="用户头像" width="120">
+          <template #default="scope">
+            <img :src="scope.row.avatar" style="width: 40px;height: 40px;border-radius: 50%">
+          </template>
+        </el-table-column>
         <el-table-column fixed type="selection" width="50"></el-table-column>
         <el-table-column prop="username" label="用户名称" width="120"></el-table-column>
         <el-table-column prop="role" label="角色" width="120"></el-table-column>
@@ -156,6 +166,13 @@ const formRef=ref()
     <!--新增页面的弹出框-->
     <el-dialog v-model="data.formVisible" title="管理员信息" width="500" destroy-on-close>
       <el-form ref="formRef" :rules="data.rules" :model="data.form">  <!--ref表单校验-->
+        <!--新增用户头像-->
+        <el-form-item label="头像">
+          <el-upload class="avatar-uploader" action="http://localhost:8080/files/upload" :show-file-list="picture" :on-success="handleAvatarSuccess">
+            <img v-if="data.form.avatar" :src="data.form.avatar" class="avatar" />
+            <el-icon v-else class="avatar-uploader-icon"><Plus /></el-icon>
+          </el-upload>
+        </el-form-item>
         <el-form-item label="账号" label-width="60px" prop="username">
           <el-input v-model="data.form.username" autocomplete="off" />
         </el-form-item>

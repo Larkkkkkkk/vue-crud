@@ -12,6 +12,11 @@ const validatePass = (rule, value, callback) => {
   }
 }
 
+//上传头像
+const handleAvatarSuccess= (res) =>{
+  data.form.avatar=res.data
+}
+
 const data=reactive({
   form:{},
   rules:{
@@ -105,6 +110,14 @@ const updatePassword= () => {
 <template>
   <div class="card" style="width: 50%">
     <el-form ref="formRef" :rules="data.rules" :model="data.form">  <!--ref表单校验-->
+      <!--上传文件-->
+      <el-form-item label="头像" >
+        <el-upload class="avatar-uploader" action="http://localhost:8080/files/upload" :show-file-list="false" :on-success="handleAvatarSuccess">
+          <img v-if="data.form.avatar" :src="data.form.avatar" class="avatar" />
+          <el-icon v-else class="avatar-uploader-icon"><Plus /></el-icon>
+        </el-upload>
+      </el-form-item>
+      <!--其余数据库信息-->
       <el-form-item label="账号" label-width="60px" prop="username">
         <el-input disabled v-model="data.form.username" autocomplete="off" />
       </el-form-item>
@@ -149,3 +162,35 @@ const updatePassword= () => {
     </div>
   </div>
 </template>
+
+<!--上传文件-->
+<style scoped>
+.avatar-uploader .avatar {
+  width: 178px;
+  height: 178px;
+  display: block;
+}
+</style>
+
+<style>
+.avatar-uploader .el-upload {
+  border: 1px dashed var(--el-border-color);
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: var(--el-transition-duration-fast);
+}
+
+.avatar-uploader .el-upload:hover {
+  border-color: var(--el-color-primary);
+}
+
+.el-icon.avatar-uploader-icon {
+  font-size: 28px;
+  color: #8c939d;
+  width: 100px;
+  height: 100px;
+  text-align: center;
+}
+</style>
